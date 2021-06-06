@@ -24,6 +24,7 @@ const initialBlock = {
 const tagSelection = {
   'Heading 1': 'h1',
   'Heading 2': 'h2',
+  'Heading 3': 'h3',
   Paragraph: 'p',
 }
 const blocksReducers = (blocks = { initialBlock }, action) => {
@@ -33,7 +34,6 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
     // Insert a new block next to the current block
     case 'ADD_BLOCK':
       const selectedTag = tagSelection[action.payload.tag]
-      console.log(action.payload.tag)
       const id = uid()
       const newBlock = {
         id,

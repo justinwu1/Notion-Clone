@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import ContentEditable from 'react-contenteditable'
 import { connect } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { addBlock, updateBlock, deleteBlock } from '../actions'
+import DropdownMenu from './DropdownMenu'
 class EditBlock extends Component {
   constructor(props) {
     super(props)
@@ -40,47 +39,11 @@ class EditBlock extends Component {
       html: event.target.value,
     })
   }
-
-  menuClickHandler = (event) => {
-    event.preventDefault()
-    this.props.addBlock({
-      id: this.props.id,
-      ref: this.contentEditable.current,
-      tag: event.target.outerText,
-    })
-  }
-  renderMenu = () => {
-    const tags = ['Heading 1', 'Heading 2', 'Heading 3', 'Paragraph']
-    return tags.map((tag) => {
-      return (
-        <button onClick={this.menuClickHandler} className='dropdown-item'>
-          {tag}
-        </button>
-      )
-    })
-  }
   render() {
     return (
       <>
         <div>
-          <div
-            style={{ display: 'inline-block', marginRight: '0.5rem' }}
-            className='dropdown'
-          >
-            <button
-              className='btn btn-outline-secondary btn-sm'
-              type='button'
-              id='dropdownMenuButton'
-              data-toggle='dropdown'
-              aria-haspopup='true'
-              aria-expanded='false'
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-            <div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-              {this.renderMenu()}
-            </div>
-          </div>
+          <DropdownMenu id={this.props.id} blockRef={this.contentEditable} />
           <ContentEditable
             innerRef={this.contentEditable}
             html={this.props.html} // innerHTML of the editable div
