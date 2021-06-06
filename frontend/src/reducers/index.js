@@ -20,16 +20,24 @@ const initialBlock = {
   html: '',
   tagName: 'h1',
 }
+
+const tagSelection = {
+  'Heading 1': 'h1',
+  'Heading 2': 'h2',
+  Paragraph: 'p',
+}
 const blocksReducers = (blocks = { initialBlock }, action) => {
   let updatedBlocks
   let index
   switch (action.type) {
     // Insert a new block next to the current block
     case 'ADD_BLOCK':
+      const selectedTag = tagSelection[action.payload.tag]
+      console.log(action.payload.tag)
       const id = uid()
       const newBlock = {
         id,
-        tagName: 'div',
+        tagName: selectedTag,
         html: '',
       }
       updatedBlocks = [...Object.values(blocks)]

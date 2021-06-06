@@ -14,9 +14,14 @@ class EditBlock extends Component {
     // If the user hit Enter, insert a new block below the currfent Block
     if (event.key === 'Enter') {
       event.preventDefault()
+      let selectedTag = event.target.outerText
+      if (selectedTag === null) {
+        selectedTag = 'p'
+      }
       this.props.addBlock({
         id: this.props.id,
         ref: this.contentEditable.current,
+        tag: event.target.outerText,
       })
     }
 
@@ -33,6 +38,25 @@ class EditBlock extends Component {
     this.props.updateBlock({
       id: this.props.id,
       html: event.target.value,
+    })
+  }
+
+  menuClickHandler = (event) => {
+    event.preventDefault()
+    this.props.addBlock({
+      id: this.props.id,
+      ref: this.contentEditable.current,
+      tag: event.target.outerText,
+    })
+  }
+  renderMenu = () => {
+    const tags = ['Heading 1', 'Heading 2', 'Heading 3', 'Paragraph']
+    return tags.map((tag) => {
+      return (
+        <button onClick={this.menuClickHandler} className='dropdown-item'>
+          {tag}
+        </button>
+      )
     })
   }
   render() {
@@ -54,9 +78,7 @@ class EditBlock extends Component {
               <FontAwesomeIcon icon={faPlus} />
             </button>
             <div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-              <button className='dropdown-item'>Action</button>
-              <button className='dropdown-item'>Another action</button>
-              <button className='dropdown-item'>Something else here</button>
+              {this.renderMenu()}
             </div>
           </div>
           <ContentEditable
