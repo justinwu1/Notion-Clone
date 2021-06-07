@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { addBlock, updateBlock, deleteBlock } from '../actions'
 import DropdownMenu from './DropdownMenu'
 import { Draggable } from 'react-beautiful-dnd'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGripVertical } from '@fortawesome/free-solid-svg-icons'
 class EditBlock extends Component {
   constructor(props) {
     super(props)
@@ -41,7 +43,6 @@ class EditBlock extends Component {
     })
   }
   render() {
-    console.log(this.props)
     return (
       <>
         <Draggable draggableId={this.props.id} index={this.props.index}>
@@ -51,6 +52,20 @@ class EditBlock extends Component {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
+              <div
+                style={{
+                  display: 'inline-block',
+                  marginRight: '0.5rem',
+                }}
+              >
+                <button
+                  className='btn btn-outline-secondary btn-sm'
+                  type='button'
+                  style={{ cursor: 'grab' }}
+                >
+                  <FontAwesomeIcon icon={faGripVertical} />
+                </button>
+              </div>
               <DropdownMenu
                 id={this.props.id}
                 blockRef={this.contentEditable}
@@ -67,6 +82,7 @@ class EditBlock extends Component {
                   border: '1px solid red',
                   marginTop: '1rem',
                   display: 'inline-block',
+                  cursor: 'text',
                 }}
                 onChange={this.updateNewBlock}
               />

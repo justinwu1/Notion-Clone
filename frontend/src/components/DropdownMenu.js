@@ -5,7 +5,6 @@ import { addBlock } from '../actions/index'
 import { connect } from 'react-redux'
 class DropdownMenu extends Component {
   menuClickHandler = (event) => {
-    console.log(this.props)
     event.preventDefault()
     this.props.addBlock({
       id: this.props.id,

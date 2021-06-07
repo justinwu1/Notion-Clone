@@ -15,7 +15,7 @@ class EditPage extends Component {
                 html={block.html}
                 key={block.id}
                 id={block.id}
-                placeHolderMsg={block.id}
+                placeHolderMsg={block.placeHolderMsg}
               />
               {provided.placeholder}
             </div>
