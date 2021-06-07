@@ -25,3 +25,10 @@ export const updateItem = (menu) => {
     payload: menu,
   }
 }
+
+export const updatePosition = (result) => {
+  return {
+    type: 'UPDATE_POSITION',
+    payload: result,
+  }
+}
