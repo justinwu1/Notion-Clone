@@ -4,6 +4,9 @@ const app = express()
 
 //C Connect database
 connectDB()
+
+app.use(expres.json({ extended: false }))
+
 app.get('/', (req, res) => res.send('API running'))
 
 // Define Routes
