@@ -5,7 +5,8 @@ const app = express()
 //C Connect database
 connectDB()
 
-app.use(expres.json({ extended: false }))
+// body parser middleware(validate data so we can pass data into req.body)
+app.use(express.json({ extended: false }))
 
 app.get('/', (req, res) => res.send('API running'))
 
