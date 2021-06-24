@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://123qwe:123qwe@notion-clone.34c3y.mongodb.net/Notion-Clone?retryWrites=true&w=majority",
-    "jwtSecret":"mysecrettoken"
-}
