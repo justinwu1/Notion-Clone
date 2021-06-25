@@ -6,6 +6,9 @@ import EditPage from './EditPage'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { connect } from 'react-redux'
 import { updatePosition } from '../actions/index'
+import Header from '../components/Header'
+import { Navbar } from 'react-bootstrap'
+
 class App extends Component {
   onDragEnd = (result) => {
     const { destination, source } = result
@@ -32,8 +35,17 @@ class App extends Component {
   render = () => {
     return (
       <>
+        <Container>
+          <Navbar>
+            <Navbar.Brand href='#home'>Notion-Clone</Navbar.Brand>
+            <Navbar.Collapse className='justify-content-end'>
+              <Navbar.Text>
+                <Header />
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Navbar>
+        </Container>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <h3 style={{ textAlign: 'center' }}>Notion Clone</h3>
           <Container style={{ marginTop: '100px' }}>
             <EditPage />
           </Container>
