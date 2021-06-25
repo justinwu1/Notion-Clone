@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import authReducer from './authReducer'
 const uid = () => {
   return '_' + Math.random().toString(36).substr(2, 9)
 }
@@ -126,4 +127,5 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
 
 export default combineReducers({
   blocks: blocksReducers,
+  auth: authReducer,
 })
