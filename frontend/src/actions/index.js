@@ -1,3 +1,5 @@
+import { SIGN_IN, SIGN_OUT } from '../reducers/types'
+
 export const addBlock = (currentBlock) => {
   return {
     type: 'ADD_BLOCK',
@@ -35,13 +37,13 @@ export const updatePosition = (result) => {
 
 export const signIn = (userId) => {
   return {
-    type: 'SIGN_IN',
+    type: SIGN_IN,
     payload: userId,
   }
 }
 
 export const signOut = () => {
   return {
-    type: 'SIGN_OUT',
+    type: SIGN_OUT,
   }
 }
