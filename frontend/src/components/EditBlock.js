@@ -79,7 +79,12 @@ class EditBlock extends Component {
                 placeholder={this.props.placeHolderMsg}
                 id={this.props.uid}
                 style={{
-                  border: '1px solid red',
+                  border: '3px solid transparent',
+                  borderImage:
+                    'linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%)',
+                  borderImageSlice: '1',
+
+                  margin: '20px auto',
                   marginTop: '1rem',
                   display: 'inline-block',
                   cursor: 'text',

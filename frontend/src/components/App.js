@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container } from 'react-bootstrap'
 import './App.css'
 import './EditBlock'
+import Sidepanel from './Sidepanel'
 import EditPage from './EditPage'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { connect } from 'react-redux'
@@ -11,6 +12,8 @@ import { Navbar } from 'react-bootstrap'
 
 class App extends Component {
   onDragEnd = (result) => {
+    // TODO: Structure the component, if user login = render sidepanel + Editable Page
+    // TODO: If user not login, show only the demo (editable Page)
     const { destination, source } = result
 
     // If no destination, exit
@@ -26,30 +29,13 @@ class App extends Component {
       return
     }
     const block = this.props.blocks[source.index]
-    // const index = this.props.blocks
-    //   .map((block) => block.id)
-    //   .indexOf(source.droppableId)
     result['block'] = block
     this.props.updatePosition(result)
   }
   render = () => {
     return (
       <>
-        <Container>
-          <Navbar>
-            <Navbar.Brand href='#home'>Notion-Clone</Navbar.Brand>
-            <Navbar.Collapse className='justify-content-end'>
-              <Navbar.Text>
-                <Header />
-              </Navbar.Text>
-            </Navbar.Collapse>
-          </Navbar>
-        </Container>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Container style={{ marginTop: '100px' }}>
-            <EditPage />
-          </Container>
-        </DragDropContext>
+        <Sidepanel />
       </>
     )
   }

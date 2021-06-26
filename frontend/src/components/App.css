@@ -2,7 +2,6 @@
   outline: 0px solid transparent;
   width: 900px;
 }
-
 [contenteditable='true']:empty:before {
   content: attr(placeholder);
   display: block;
