@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { signIn, signOut } from '../actions/index'
+import { signIn, signOut } from '../../actions/index'
 import { connect } from 'react-redux'
 
 class GoogleAuth extends Component {

@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from 'react-bootstrap'
-import EditPage from './EditPage'
-import { DragDropContext } from 'react-beautiful-dnd'
-import Header from './Header'
-import { Navbar } from 'react-bootstrap'
+import WholeBlock from './WholeBlock'
 import './Sidepanel.css'
 export default class Sidepanel extends Component {
   render() {
@@ -55,12 +51,7 @@ export default class Sidepanel extends Component {
           </div>
 
           <div id='page-content-wrapper'>
-            <Header />
-            <DragDropContext onDragEnd={this.onDragEnd}>
-              <Container style={{ marginTop: '100px' }}>
-                <EditPage />
-              </Container>
-            </DragDropContext>
+            <WholeBlock />
           </div>
         </div>
       </>

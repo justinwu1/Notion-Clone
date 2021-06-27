@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GoogleAuth from './GoogleAuth'
+import GoogleAuth from './auth/GoogleAuth'
 import { Navbar, Container } from 'react-bootstrap'
 
 export default class Header extends Component {

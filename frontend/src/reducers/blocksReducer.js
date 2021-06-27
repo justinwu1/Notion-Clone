@@ -30,6 +30,7 @@ const tagSelection = {
 const blocksReducers = (blocks = { initialBlock }, action) => {
   let updatedBlocks
   let index
+
   switch (action.type) {
     // Insert a new block next to the current block
     case 'ADD_BLOCK':
@@ -63,7 +64,6 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
       updatedBlocks.splice(index + 1, 0, newBlock)
 
       // Callback alternative for focus() function (should replace with callback)
-
       setTimeout(() => {
         action.payload.ref.parentElement.parentElement.nextElementSibling.children[0].children[2].focus()
       }, 10)
