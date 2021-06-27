@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { Container } from 'react-bootstrap'
 import EditPage from './EditPage'
-import { updatePosition } from '../actions/index'
+import { updatePosition } from '../../actions/index'
 import { connect } from 'react-redux'
 class WholeBlock extends Component {
   onDragEnd = (result) => {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import './EditBlock'
+import './blankpage/EditBlock'
 import Sidepanel from './SidePanel'
+import WholeBlock from './blankpage/WholeBlock'
 import Header from '../components/Header'
-
+import { connect } from 'react-redux'
 // TODO: Structure the component, if user login = render sidepanel + Editable Page
 // TODO: If user not login, show only the demo (editable Page)
 // TODO: change class to className
@@ -17,13 +18,27 @@ import Header from '../components/Header'
       - If(user not login)render the editpage only
     */
 class App extends Component {
+  renderOptions() {
+    const { userId } = this.props.auth
+    if (!userId) {
+      return <WholeBlock />
+    }
+    if (userId) {
+      return <Sidepanel />
+    }
+  }
   render = () => {
     return (
       <>
         <Header />
-        <Sidepanel />
+        {this.renderOptions()}
       </>
     )
   }
 }
-export default App
+
+const mapStateToProps = (state) => {
+  return { auth: state.auth }
+}
+
+export default connect(mapStateToProps)(App)
