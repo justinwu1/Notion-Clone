@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container } from 'react-bootstrap'
 import EditPage from './EditPage'
 import { DragDropContext } from 'react-beautiful-dnd'
-import Header from '../components/Header'
+import Header from './Header'
 import { Navbar } from 'react-bootstrap'
 import './Sidepanel.css'
 export default class Sidepanel extends Component {
@@ -55,16 +55,7 @@ export default class Sidepanel extends Component {
           </div>
 
           <div id='page-content-wrapper'>
-            <Container>
-              <Navbar>
-                <Navbar.Brand href='#home'>Notion-Clone</Navbar.Brand>
-                <Navbar.Collapse className='justify-content-end'>
-                  <Navbar.Text>
-                    <Header />
-                  </Navbar.Text>
-                </Navbar.Collapse>
-              </Navbar>
-            </Container>
+            <Header />
             <DragDropContext onDragEnd={this.onDragEnd}>
               <Container style={{ marginTop: '100px' }}>
                 <EditPage />
