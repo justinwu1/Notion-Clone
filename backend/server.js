@@ -26,6 +26,10 @@ connection.once('open', () => {
   console.log('MongoDB database connection established succssfully')
 })
 
+const pageRouter = require('./routes/pages')
+
+app.use('/pages', pageRouter)
+
 app.get('/', (req, res) => res.send('API running'))
 
 const PORT = process.env.PORT || 5000 // Default 5000 or heroku port
