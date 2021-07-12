@@ -1,18 +1,32 @@
 const express = require('express')
-const connectDB = require('./config/db')
+const cors = require('cors')
+const mongoose = require('mongoose')
+
+require('dotenv').config()
+
 const app = express()
 
-//C Connect database
-connectDB()
+// Cors
+app.use(cors())
 
 // body parser middleware(validate data so we can pass data into req.body)
 app.use(express.json({ extended: false }))
 
-app.get('/', (req, res) => res.send('API running'))
+const uri = process.env.ATLAS_URI
 
-// Define Routes
-app.use('/api/users', require('./routes/api/users'))
-app.use('/api/auth', require('./routes/api/auth'))
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
+
+const connection = mongoose.connection
+
+connection.once('open', () => {
+  console.log('MongoDB database connection established succssfully')
+})
+
+app.get('/', (req, res) => res.send('API running'))
 
 const PORT = process.env.PORT || 5000 // Default 5000 or heroku port
 
