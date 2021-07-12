@@ -16,7 +16,7 @@ const setCaretToEnd = (element) => {
 const initialId = uid()
 const initialBlock = {
   id: initialId,
-  html: '',
+  html: 'UNTITLED',
   tagName: 'h1',
   placeHolderMsg: 'Header 1',
 }

@@ -6,6 +6,7 @@ import DropdownMenu from '../DropdownMenu'
 import { Draggable } from 'react-beautiful-dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons'
+
 class EditBlock extends Component {
   constructor(props) {
     super(props)
@@ -99,7 +100,7 @@ class EditBlock extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { blocks: state.blocks }
+  return { auth: state.auth, blocks: state.blocks }
 }
 export default connect(mapStateToProps, { addBlock, updateBlock, deleteBlock })(
   EditBlock

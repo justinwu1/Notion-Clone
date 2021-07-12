@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
 import './blankpage/EditBlock'
-import Sidepanel from './SidePanel'
-import WholeBlock from './blankpage/WholeBlock'
+import UserPage from './UserPage'
+import WholePage from './blankpage/WholePage'
 import Header from '../components/Header'
 import { connect } from 'react-redux'
-
-// ? Might need  to change the name of Sidepanel because it will render the whole WholeBlock + a sidepanel.
 
 class App extends Component {
   // If a user login, show his/her pages data .
@@ -14,10 +12,14 @@ class App extends Component {
   renderOptions() {
     const { userId } = this.props.auth
     if (!userId) {
-      return <WholeBlock />
+      return (
+        <>
+          <WholePage />
+        </>
+      )
     }
     if (userId) {
-      return <Sidepanel />
+      return <UserPage />
     }
   }
   render = () => {
@@ -31,7 +33,20 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { auth: state.auth }
+  return { auth: state.auth, blocks: state.blocks }
 }
 
 export default connect(mapStateToProps)(App)
+/*
+ComponentDidMount --> GET all the page 
+
+Click Add pagee --> Create the new page -->POST Request on creating a new page --> store and Update the state --> Rerender. 
+
+Autosave = componentDidUpdate
+
+TODO: Design a page reducer to store all the pages in the state, 
+The state data should can be connected in this App.js, pass the props to Sidepanel
+{
+  pageId:{blockData:{dataAssociatesWithThatPage}}
+}
+*/

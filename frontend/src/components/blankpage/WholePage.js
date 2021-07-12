@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 import EditPage from './EditPage'
 import { updatePosition } from '../../actions/index'
 import { connect } from 'react-redux'
-class WholeBlock extends Component {
+class WholePage extends Component {
   onDragEnd = (result) => {
     const { destination, source } = result
 
@@ -40,4 +40,4 @@ class WholeBlock extends Component {
 const mapStateToProps = (state) => {
   return { blocks: Object.values(state.blocks) }
 }
-export default connect(mapStateToProps, { updatePosition })(WholeBlock)
+export default connect(mapStateToProps, { updatePosition })(WholePage)

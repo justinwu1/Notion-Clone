@@ -35,10 +35,10 @@ export const updatePosition = (result) => {
   }
 }
 
-export const signIn = (userId) => {
+export const signIn = (userId, googleEmail) => {
   return {
     type: SIGN_IN,
-    payload: userId,
+    payload: { userId, googleEmail },
   }
 }
 
