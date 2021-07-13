@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const pageSchema = new Schema(
   {
-    googleName: {
+    googleEmail: {
       type: String,
       unique: true,
       trim: true,
@@ -18,6 +18,6 @@ const pageSchema = new Schema(
   }
 )
 
-const Page = mongoose.model('Exercise', pageSchema)
+const Page = mongoose.model('Pages', pageSchema)
 
 module.exports = Page

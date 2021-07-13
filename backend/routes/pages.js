@@ -8,10 +8,10 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
-  const googleName = req.body.googleName
-  const page = req.body.page
-
-  const newPage = new Page({ googleName, page })
+  const googleEmail = req.body.googleEmail
+  const pageData = req.body.pageData
+  console.log(pageData)
+  const newPage = new Page({ googleEmail, pageData })
 
   newPage
     .save()
