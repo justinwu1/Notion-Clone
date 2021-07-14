@@ -4,6 +4,10 @@ const Schema = mongoose.Schema
 
 const pageSchema = new Schema(
   {
+    title: {
+      type: String,
+      trim: true,
+    },
     googleEmail: {
       type: String,
       unique: true,

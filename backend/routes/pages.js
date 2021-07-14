@@ -12,8 +12,8 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
   const googleEmail = req.body.googleEmail
   const pageData = req.body.pageData
-  console.log(pageData)
-  const newPage = new Page({ googleEmail, pageData })
+  const title = req.body.title
+  const newPage = new Page({ googleEmail, pageData, title })
 
   newPage
     .save()
