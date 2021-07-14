@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import WholePage from './blankpage/WholePage'
+import pages from '../pages'
 import './UserPage.css'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class UserPage extends Component {
+  onSubmit = async () => {
+    const data = await pages.post('pages/add', {
+      title: 'UNTITLED',
+      googleEmail: 'testinsssg@gmail.com',
+      pageData: [
+        { blocks: { html: 'some contentssssssssssssssssss', tags: 'h1' } },
+      ],
+    })
+  }
   render() {
     return (
       <>
@@ -14,12 +24,12 @@ class UserPage extends Component {
               {this.props.googleEmail}
             </div>
             <div className='list-group list-group-flush'>
-              <a
+              <button
+                onClick={this.onSubmit}
                 className='list-group-item list-group-item-action list-group-item-light p-3'
-                href='#!'
               >
                 <FontAwesomeIcon icon={faPlus} /> New Page
-              </a>
+              </button>
             </div>
           </div>
 
