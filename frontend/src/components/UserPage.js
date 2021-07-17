@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { createPages } from '../actions'
 import WholePage from './blankpage/WholePage'
-import pages from '../pages'
 import './UserPage.css'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+const uid = () => {
+  return '_' + Math.random().toString(36).substr(2, 9)
+}
+
+const initialId = uid()
+const initialBlock = {
+  id: initialId,
+  html: 'UNTITLED',
+  tagName: 'h1',
+  placeHolderMsg: 'Header 1',
+}
 class UserPage extends Component {
-  onSubmit = async () => {
-    const data = await pages.post('pages/add', {
+  onSubmit = () => {
+    const pagesData = {
       title: 'UNTITLED',
-      googleEmail: 'testinsssg@gmail.com',
-      pageData: [
-        { blocks: { html: 'some contentssssssssssssssssss', tags: 'h1' } },
-      ],
-    })
+      googleEmail: this.props.googleEmail,
+      pageData: [initialBlock],
+    }
+    this.props.createPages(pagesData)
   }
   render() {
     return (
@@ -46,4 +56,4 @@ const mapStateToProps = (state) => {
   return { googleEmail: state.auth.googleEmail }
 }
 
-export default connect(mapStateToProps)(UserPage)
+export default connect(mapStateToProps, { createPages })(UserPage)

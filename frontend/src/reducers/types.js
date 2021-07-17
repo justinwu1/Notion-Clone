@@ -1,2 +1,7 @@
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_OUT = 'SIGN_OUT'
+export const CREATE_PAGE = 'CREATE_PAGE'
+export const FETCH_PAGES = 'FETCH_PAGES'
+export const FETCH_PAGE = 'FETCH_PAGE'
+export const DELETE_PAGE = 'DELETE_PAGE'
+export const EDIT_PAGE = 'EDIT_PAGE'
