@@ -1,5 +1,51 @@
-import { SIGN_IN, SIGN_OUT } from '../reducers/types'
+import {
+  CREATE_PAGE,
+  FETCH_PAGES,
+  FETCH_PAGE,
+  DELETE_PAGE,
+  EDIT_PAGE,
+  SIGN_IN,
+  SIGN_OUT,
+} from '../reducers/types'
+import pages from '../apis/pages'
 
+// Page actions creator
+export const createPages = (pagesData) => {
+  return async (dispatch) => {
+    const response = await pages.post('/', pagesData)
+    dispatch({ type: CREATE_PAGE, payload: response.data })
+  }
+}
+
+export const fetchPages = () => {
+  return async (dispatch) => {
+    const response = await pages.get('/')
+    dispatch({ type: FETCH_PAGES, payload: response.data })
+  }
+}
+
+export const fetchPage = (id) => {
+  return async (dispatch) => {
+    const response = await pages.get(`/${id}`)
+    dispatch({ type: FETCH_PAGE, payload: response.data })
+  }
+}
+
+export const editPage = (id, pageData) => {
+  return async (dispatch) => {
+    const response = await pages.put(`/${id}`, pageData)
+    dispatch({ type: EDIT_PAGE, payload: response.data })
+  }
+}
+
+export const deletePage = (id) => {
+  return async (dispatch) => {
+    await pages.delete(`${id}`)
+    dispatch({ type: DELETE_PAGE, payload: id })
+  }
+}
+
+// Blocks actions creator
 export const addBlock = (currentBlock) => {
   return {
     type: 'ADD_BLOCK',
