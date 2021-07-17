@@ -10,8 +10,6 @@ const pageSchema = new Schema(
     },
     googleEmail: {
       type: String,
-      unique: true,
-      trim: true,
     },
     pageData: {
       type: Array,

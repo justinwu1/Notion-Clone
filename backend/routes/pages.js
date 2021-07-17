@@ -9,7 +9,7 @@ router.route('/').get((req, res) => {
 })
 
 // Add a page
-router.route('/add').post((req, res) => {
+router.route('/').post((req, res) => {
   const googleEmail = req.body.googleEmail
   const pageData = req.body.pageData
   const title = req.body.title
@@ -17,7 +17,7 @@ router.route('/add').post((req, res) => {
 
   newPage
     .save()
-    .then(() => res.json('Page added!'))
+    .then(() => res.json(newPage))
     .catch((err) => res.status(400).json('Error' + err))
 })
 
