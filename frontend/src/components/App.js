@@ -9,7 +9,6 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class App extends Component {
-  async componentDidMount() {}
   // If a user login, show his/her pages data .
   // If a guest on the page, show the blocks (demo of the app).
   renderOptions() {
@@ -22,7 +21,6 @@ class App extends Component {
     }
   }
   render = () => {
-    console.log(this.renderOptions())
     return (
       <>
         <BrowserRouter>

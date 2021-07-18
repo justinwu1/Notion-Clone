@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createPages } from '../actions'
+import { createPages, fetchPages } from '../actions'
 import WholePage from './blankpage/WholePage'
 import './UserPage.css'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -17,6 +17,9 @@ const initialBlock = {
   placeHolderMsg: 'Header 1',
 }
 class UserPage extends Component {
+  async componentDidMount() {
+    await this.props.fetchPages()
+  }
   onSubmit = () => {
     const pagesData = {
       title: 'UNTITLED',
@@ -24,6 +27,18 @@ class UserPage extends Component {
       pageData: [initialBlock],
     }
     this.props.createPages(pagesData)
+  }
+  renderTitle = () => {
+    const userData = this.props.pages.filter(
+      (page) => page.googleEmail === this.props.googleEmail
+    )
+    return userData.map((page) => {
+      return (
+        <div className='list-group-item list-group-item-action list-group-item-light p-3'>
+          {page.pageData['0'].html}
+        </div>
+      )
+    })
   }
   render() {
     return (
@@ -34,6 +49,7 @@ class UserPage extends Component {
               {this.props.googleEmail}
             </div>
             <div className='list-group list-group-flush'>
+              {this.renderTitle()}
               <button
                 onClick={this.onSubmit}
                 className='list-group-item list-group-item-action list-group-item-light p-3'
@@ -53,7 +69,10 @@ class UserPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { googleEmail: state.auth.googleEmail }
+  return {
+    googleEmail: state.auth.googleEmail,
+    pages: Object.values(state.pages),
+  }
 }
 
-export default connect(mapStateToProps, { createPages })(UserPage)
+export default connect(mapStateToProps, { createPages, fetchPages })(UserPage)
