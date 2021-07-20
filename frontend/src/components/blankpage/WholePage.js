@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 class WholePage extends Component {
   onDragEnd = (result) => {
     const { destination, source } = result
-
     // If no destination, exit
     if (!destination) {
       return
@@ -29,7 +28,7 @@ class WholePage extends Component {
       <>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Container style={{ marginTop: '100px' }}>
-            <EditPage />
+            <EditPage page={this.props.page} />
           </Container>
         </DragDropContext>
       </>

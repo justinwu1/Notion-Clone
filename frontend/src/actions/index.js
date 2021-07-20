@@ -8,12 +8,14 @@ import {
   SIGN_OUT,
 } from '../reducers/types'
 import pages from '../apis/pages'
+import history from '../components/history'
 
 // Page actions creator
 export const createPages = (pagesData) => {
   return async (dispatch) => {
     const response = await pages.post('/', pagesData)
     dispatch({ type: CREATE_PAGE, payload: response.data })
+    history.push(`/${response.data._id}`)
   }
 }
 

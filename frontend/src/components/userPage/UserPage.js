@@ -1,32 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createPages, fetchPages } from '../actions'
-import WholePage from './blankpage/WholePage'
+import { createPages, fetchPages } from '../../actions'
+import WholePage from '../blankpage/WholePage'
 import './UserPage.css'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-const uid = () => {
-  return '_' + Math.random().toString(36).substr(2, 9)
-}
+import { Link } from 'react-router-dom'
+import { nanoid } from 'nanoid'
 
-const initialId = uid()
-const initialBlock = {
-  id: initialId,
-  html: 'UNTITLED',
-  tagName: 'h1',
-  placeHolderMsg: 'Header 1',
-}
+/*
+1. pageReducer = CRUD operation
+2. blockReducer = record the state that happens to block. (Adding stuff, changing, deleting a block.)
+
+pageReducer -> get back some data -> send it to the blockReducer.
+
+*/
+// TODO: Navigate to every page, when edit, upload that data.
 class UserPage extends Component {
   async componentDidMount() {
     await this.props.fetchPages()
   }
   onSubmit = () => {
-    const pagesData = {
+    const data = {
+      pageData: {
+        id: nanoid(),
+        html: 'UNTITLED',
+        tagName: 'h1',
+        placeHolderMsg: 'Header 1',
+      },
       title: 'UNTITLED',
       googleEmail: this.props.googleEmail,
-      pageData: [initialBlock],
     }
-    this.props.createPages(pagesData)
+    this.props.createPages(data)
   }
   renderTitle = () => {
     const userData = this.props.pages.filter(
@@ -34,9 +39,13 @@ class UserPage extends Component {
     )
     return userData.map((page) => {
       return (
-        <div className='list-group-item list-group-item-action list-group-item-light p-3'>
+        <Link
+          key={page._id}
+          to={`/${page._id}`}
+          className='list-group-item list-group-item-action list-group-item-light p-3'
+        >
           {page.pageData['0'].html}
-        </div>
+        </Link>
       )
     })
   }
@@ -60,7 +69,7 @@ class UserPage extends Component {
           </div>
 
           <div id='page-content-wrapper'>
-            <WholePage />
+            <WholePage page={this.props.page} />
           </div>
         </div>
       </>
@@ -68,8 +77,9 @@ class UserPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
+    blocks: state.blocks,
     googleEmail: state.auth.googleEmail,
     pages: Object.values(state.pages),
   }

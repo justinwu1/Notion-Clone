@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import EditBlock from './EditBlock'
 import { Droppable } from 'react-beautiful-dnd'
+import { updateBlock, fetchPage } from '../../actions'
+
 class EditPage extends Component {
   renderBlocks() {
     return this.props.blocks.map((block, index) => {
@@ -28,8 +30,11 @@ class EditPage extends Component {
     return <>{this.renderBlocks()}</>
   }
 }
-const mapStateToProps = (state) => {
-  return { blocks: Object.values(state.blocks) }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    blocks: Object.values(state.blocks),
+    // page: state.streams[ownProps.match.params.id],
+  }
 }
 
-export default connect(mapStateToProps)(EditPage)
+export default connect(mapStateToProps, { updateBlock, fetchPage })(EditPage)

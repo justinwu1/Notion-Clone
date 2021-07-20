@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './App.css'
 import './blankpage/EditBlock'
-import UserPage from './UserPage'
+import UserPage from './userPage/UserPage'
 import WholePage from './blankpage/WholePage'
 import Header from '../components/Header'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
-
+import { Router, Route } from 'react-router-dom'
+import history from './history'
 import { connect } from 'react-redux'
 
 class App extends Component {
@@ -23,10 +23,11 @@ class App extends Component {
   render = () => {
     return (
       <>
-        <BrowserRouter>
+        <Router history={history}>
           <Header />
           <Route path='/' exact component={this.renderOptions()} />
-        </BrowserRouter>
+          <Route path='/:id' component={this.renderOptions()} />
+        </Router>
       </>
     )
   }
@@ -37,14 +38,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(App)
-/*
-ComponentDidMount --> GET all the page and show the title
-
-Click Add pagee --> Create the new page -->POST Request on creating a new page --> GET Request on that page immediately --> Show it on the screen
-Click on one page --> GET request on that page immediately --> Show it on the screen
-
-Question: How to show it onto the screen? 
-- GET that page data, call blockUpdate to update the blocks with the pageData,
-
-Autosave = componentDidUpdate
-*/

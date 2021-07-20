@@ -20,7 +20,6 @@ const pageReducer = (state = {}, action) => {
         [action.payload._id]: action.payload,
       }
     case FETCH_PAGES:
-      console.log(_.mapKeys(action.payload, '_id'))
       return {
         ...state,
         ..._.mapKeys(action.payload, '_id'),

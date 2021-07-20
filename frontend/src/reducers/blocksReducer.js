@@ -30,7 +30,6 @@ const tagSelection = {
 const blocksReducers = (blocks = { initialBlock }, action) => {
   let updatedBlocks
   let index
-
   switch (action.type) {
     // Insert a new block next to the current block
     case 'ADD_BLOCK':
