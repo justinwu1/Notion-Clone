@@ -3,53 +3,65 @@ let Page = require('../models/pages.model')
 
 // Return all the page
 router.route('/').get((req, res) => {
-  Page.find()
-    .then((pages) => res.json(pages))
-    .catch((err) => res.status(400).json('Error' + err))
+  Page.find({}).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err)
+    }
+    res.status(200).json(result)
+  })
 })
 
 // Add a page
-router.route('/').post((req, res) => {
+router.post('/', (req, res) => {
   const googleEmail = req.body.googleEmail
   const pageData = req.body.pageData
   const title = req.body.title
-  const newPage = new Page({ googleEmail, pageData, title })
-
-  newPage
-    .save()
-    .then(() => res.json(newPage))
-    .catch((err) => res.status(400).json('Error' + err))
+  const data = { googleEmail, pageData, title }
+  const page = new Page(data)
+  page.save((err, result) => {
+    if (err) {
+      return res.status(400).json(err)
+    }
+    res.status(200).json(result)
+  })
 })
 
 // Return single page data
 router.route('/:id').get((req, res) => {
-  Page.findById(req.params.id)
-    .then((page) => res.json(page))
-    .catch((err) => res.status(400).json('Error' + err))
+  Page.findOne({ _id: req.params.id }).exec((err, page) => {
+    if (err) {
+      return res.status(400).json(err)
+    }
+    res.json(page)
+  })
 })
 
 // Delete a Page
 router.route('/:id').delete((req, res) => {
-  Page.findByIdAndDelete(req.params.id)
-    .then((page) => res.json('Page deleted'))
-    .catch((err) => res.status(400).json('Error' + err))
+  Page.findOneAndDelete({ _id: req.params.id }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err)
+    }
+    res.status(200).json(result)
+  })
 })
 
 // Update the data in a page
-router.route('/update/:id').post((req, res) => {
-  Page.findById(req.params.id)
-    .then((page) => {
-      page.pageData = req.body.pageData
-
-      // update &　save it to the database
-      page
-        .save()
-        .then(() => res.json('Page Updated'))
-        .catch((err) => {
-          res.status(400).json('Error' + err)
-        })
-    })
-    .catch((err) => res.status(400).json('Error' + err))
+router.route('/update/:id').patch((req, res) => {
+  console.log(req.body)
+  const data = {
+    id: req.params.id,
+    pageData: req.body.pageData,
+  }
+  Page.findOneAndUpdate({ _id: data.id }, data, {
+    returnOriginal: false,
+  }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err)
+    }
+    console.log(result)
+    res.status(200).json(result)
+  })
 })
 
 module.exports = router
