@@ -122,8 +122,17 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
         action.payload.block
       )
       return { ...updatedBlocks }
+    case 'FETCH_BLOCK':
+      blocks = {}
+      const arr = { ...action.payload }
+      return { ...blocks, ...arr }
     default:
       return blocks
   }
 }
 export default blocksReducers
+
+/* 
+Problem: Then all page will share the same data because we updated the block reducer by combining them
+Solution:Reset the blocks data whenever we fetch something new.
+*/

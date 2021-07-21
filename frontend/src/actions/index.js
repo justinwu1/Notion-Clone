@@ -83,6 +83,15 @@ export const updatePosition = (result) => {
   }
 }
 
+// This action creator will update the block state by getting the data in the database
+export const fetchBlock = (response) => {
+  return {
+    type: 'FETCH_BLOCK',
+    payload: response,
+  }
+}
+
+// Auth Action Creator
 export const signIn = (userId, googleEmail) => {
   return {
     type: SIGN_IN,

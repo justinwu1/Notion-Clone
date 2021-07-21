@@ -3,14 +3,27 @@ import { connect } from 'react-redux'
 import EditBlock from './EditBlock'
 import { Droppable, DragDropContext } from 'react-beautiful-dnd'
 import { Container } from 'react-bootstrap'
-import { updatePosition, updateBlock, fetchPage } from '../../actions'
+import {
+  updatePosition,
+  updateBlock,
+  fetchPage,
+  fetchBlock,
+} from '../../actions'
 
 class EditPage extends Component {
   componentDidMount() {
-    if (this.props.match.params.id) {
-      console.log('Fetching...')
-      this.props.fetchPage(this.props.match.params.id)
-    }
+    this.unlisten = this.props.history.listen(async (location) => {
+      const paramsId = location.pathname.substring(1)
+      if (this.props.match.params.id) {
+        await this.props.fetchPage(paramsId)
+        if (this.props.page) {
+          this.props.fetchBlock(this.props.page.pageData)
+        }
+      }
+    })
+  }
+  componentWillUnmount() {
+    this.unlisten()
   }
   onDragEnd = (result) => {
     const { destination, source } = result
@@ -31,7 +44,8 @@ class EditPage extends Component {
     this.props.updatePosition(result)
   }
   renderBlocks() {
-    return this.props.blocks.map((block, index) => {
+    const newBlocks = [...this.props.blocks]
+    return newBlocks.map((block, index) => {
       return (
         <Droppable key={block.id} droppableId={block.id}>
           {(provided) => (
@@ -74,4 +88,5 @@ export default connect(mapStateToProps, {
   updateBlock,
   fetchPage,
   updatePosition,
+  fetchBlock,
 })(EditPage)
