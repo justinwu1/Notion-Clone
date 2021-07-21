@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { signIn, signOut } from '../../actions/index'
+import { signIn, signOut, clearBlock } from '../../actions/index'
 import { connect } from 'react-redux'
 
 class GoogleAuth extends Component {
@@ -30,6 +30,7 @@ class GoogleAuth extends Component {
       this.props.signIn(this.auth.currentUser.get().getId(), googleEmail)
     } else {
       this.props.signOut()
+      this.props.clearBlock()
     }
   }
 
@@ -91,4 +92,6 @@ const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn }
 }
 
-export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth)
+export default connect(mapStateToProps, { signIn, signOut, clearBlock })(
+  GoogleAuth
+)

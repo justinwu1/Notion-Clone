@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createPages, fetchPages, deletePage } from '../../actions'
+import { createPages, fetchPages, deletePage, clearBlock } from '../../actions'
 import EditPage from '../blankpage/EditPage'
 import './UserPage.css'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -46,6 +46,7 @@ class UserPage extends Component {
             icon={faTrash}
             onClick={() => {
               this.props.deletePage(page._id)
+              this.props.clearBlock()
             }}
           />
         </Link>
@@ -92,4 +93,5 @@ export default connect(mapStateToProps, {
   createPages,
   fetchPages,
   deletePage,
+  clearBlock,
 })(UserPage)

@@ -110,7 +110,6 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
         }, 10)
         return { ...updatedBlocks }
       }
-      console.log('Ran')
       return blocks
     case 'UPDATE_POSITION':
       updatedBlocks = [...Object.values(blocks)]
@@ -121,10 +120,13 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
         action.payload.block
       )
       return { ...updatedBlocks }
-    case 'FETCH_BLOCK':
+    case 'COMBINE_BLOCK':
       blocks = {}
       const arr = { ...action.payload }
       return { ...blocks, ...arr }
+    case 'CLEAR_BLOCK':
+      blocks = { initialBlock }
+      return { ...blocks }
     default:
       return blocks
   }

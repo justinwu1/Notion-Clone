@@ -14,7 +14,7 @@ let paramsId
 class EditPage extends Component {
   componentDidMount() {
     this.unlisten = this.props.history.listen(async (location) => {
-      paramsId = location.pathname.substring(1)
+      paramsId = this.props.match.params.id
       if (this.props.match.params.id) {
         await this.props.fetchPage(paramsId)
         if (this.props.page) {
@@ -26,6 +26,7 @@ class EditPage extends Component {
 
   // If user changed something, save it to the database
   async componentDidUpdate(prevProps) {
+    paramsId = this.props.match.params.id
     if (paramsId) {
       for (let i = 0; i < prevProps.blocks.length; i++) {
         if (prevProps.blocks[i].html !== this.props.blocks[i].html) {

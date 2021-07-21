@@ -11,6 +11,9 @@ import _ from 'lodash'
 const pageReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_PAGE:
+      if (!action.payload) {
+        return state
+      }
       return {
         ...state,
         [action.payload._id]: action.payload,
@@ -26,6 +29,9 @@ const pageReducer = (state = {}, action) => {
         ..._.mapKeys(action.payload, '_id'),
       }
     case EDIT_PAGE:
+      if (!action.payload) {
+        return state
+      }
       return {
         ...state,
         [action.payload._id]: action.payload,

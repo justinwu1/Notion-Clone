@@ -88,8 +88,14 @@ export const updatePosition = (result) => {
 // This action creator will update the block state by getting the data in the database
 export const fetchBlock = (response) => {
   return {
-    type: 'FETCH_BLOCK',
+    type: 'COMBINE_BLOCK',
     payload: response,
+  }
+}
+
+export const clearBlock = () => {
+  return {
+    type: 'CLEAR_BLOCK',
   }
 }
 
@@ -102,6 +108,7 @@ export const signIn = (userId, googleEmail) => {
 }
 
 export const signOut = () => {
+  history.push('/')
   return {
     type: SIGN_OUT,
   }

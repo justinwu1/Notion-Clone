@@ -7,7 +7,6 @@ import { Router, Route } from 'react-router-dom'
 import history from './history'
 import { connect } from 'react-redux'
 import EditPage from './blankpage/EditPage'
-
 class App extends Component {
   // If a user login, show his/her pages data .
   // If a guest on the page, show the blocks (demo of the app).
