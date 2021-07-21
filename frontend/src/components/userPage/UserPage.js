@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createPages, fetchPages } from '../../actions'
+import { createPages, fetchPages, deletePage } from '../../actions'
 import EditPage from '../blankpage/EditPage'
 import './UserPage.css'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { nanoid } from 'nanoid'
@@ -26,6 +26,9 @@ class UserPage extends Component {
     }
     this.props.createPages(data)
   }
+  onDelete = (id) => {
+    this.props.deletePage(id)
+  }
   renderTitle = () => {
     const userData = this.props.pages.filter(
       (page) => page.googleEmail === this.props.googleEmail
@@ -38,6 +41,13 @@ class UserPage extends Component {
           className='list-group-item list-group-item-action list-group-item-light p-3'
         >
           {page.pageData['0'].html}
+          <FontAwesomeIcon
+            style={{ marginLeft: '15px' }}
+            icon={faTrash}
+            onClick={() => {
+              this.props.deletePage(page._id)
+            }}
+          />
         </Link>
       )
     })
@@ -78,4 +88,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, { createPages, fetchPages })(UserPage)
+export default connect(mapStateToProps, {
+  createPages,
+  fetchPages,
+  deletePage,
+})(UserPage)

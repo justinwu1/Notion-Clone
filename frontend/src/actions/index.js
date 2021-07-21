@@ -45,6 +45,7 @@ export const deletePage = (id) => {
   return async (dispatch) => {
     await pages.delete(`${id}`)
     dispatch({ type: DELETE_PAGE, payload: id })
+    history.push('/')
   }
 }
 
