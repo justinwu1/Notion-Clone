@@ -23,13 +23,18 @@ class EditPage extends Component {
       }
     })
   }
-  componentDidUpdate(prevProps) {
+
+  // If user changed something, save it to the database
+  async componentDidUpdate(prevProps) {
     if (paramsId) {
-      this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
       for (let i = 0; i < prevProps.blocks.length; i++) {
         if (prevProps.blocks[i].html !== this.props.blocks[i].html) {
-          console.log('inifite loop')
-          this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
+          // Refetch immediately to show up changes, edit & refetch.
+          await this.props.editPage({
+            _id: paramsId,
+            pageData: this.props.blocks,
+          })
+          await this.props.fetchPage(paramsId)
           return
         }
       }
