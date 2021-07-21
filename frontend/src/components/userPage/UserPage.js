@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createPages, fetchPages } from '../../actions'
-import WholePage from '../blankpage/WholePage'
+import EditPage from '../blankpage/EditPage'
 import './UserPage.css'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 
-/*
-1. pageReducer = CRUD operation
-2. blockReducer = record the state that happens to block. (Adding stuff, changing, deleting a block.)
-
-pageReducer -> get back some data -> send it to the blockReducer.
-
-*/
 // TODO: Navigate to every page, when edit, upload that data.
 class UserPage extends Component {
   async componentDidMount() {
@@ -69,7 +62,7 @@ class UserPage extends Component {
           </div>
 
           <div id='page-content-wrapper'>
-            <WholePage page={this.props.page} />
+            <EditPage />
           </div>
         </div>
       </>

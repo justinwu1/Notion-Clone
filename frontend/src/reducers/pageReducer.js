@@ -6,6 +6,7 @@ import {
   EDIT_PAGE,
 } from '../reducers/types'
 import _ from 'lodash'
+// When call fetch page on one page particular, also call fetch_block to put all those data into that block
 
 const pageReducer = (state = {}, action) => {
   switch (action.type) {

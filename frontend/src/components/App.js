@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import './App.css'
 import './blankpage/EditBlock'
 import UserPage from './userPage/UserPage'
-import WholePage from './blankpage/WholePage'
 import Header from '../components/Header'
 import { Router, Route } from 'react-router-dom'
 import history from './history'
 import { connect } from 'react-redux'
+import EditPage from './blankpage/EditPage'
 
 class App extends Component {
   // If a user login, show his/her pages data .
@@ -14,7 +14,7 @@ class App extends Component {
   renderOptions() {
     const { userId } = this.props.auth
     if (!userId) {
-      return WholePage
+      return EditPage
     }
     if (userId) {
       return UserPage

@@ -1,10 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import EditBlock from './EditBlock'
-import { Droppable } from 'react-beautiful-dnd'
-import { updateBlock, fetchPage } from '../../actions'
+import { Droppable, DragDropContext } from 'react-beautiful-dnd'
+import { Container } from 'react-bootstrap'
+import { updatePosition, updateBlock, fetchPage } from '../../actions'
 
 class EditPage extends Component {
+  onDragEnd = (result) => {
+    const { destination, source } = result
+    // If no destination, exit
+    if (!destination) {
+      return
+    }
+
+    // Check if user drag the item back to the original position
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return
+    }
+    const block = this.props.blocks[source.index]
+    result['block'] = block
+    this.props.updatePosition(result)
+  }
   renderBlocks() {
     return this.props.blocks.map((block, index) => {
       return (
@@ -27,14 +46,27 @@ class EditPage extends Component {
     })
   }
   render() {
-    return <>{this.renderBlocks()}</>
+    return (
+      <>
+        <Container style={{ marginTop: '100px' }}>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            {this.renderBlocks()}
+          </DragDropContext>
+        </Container>
+      </>
+    )
   }
 }
 const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps)
   return {
     blocks: Object.values(state.blocks),
     // page: state.streams[ownProps.match.params.id],
   }
 }
 
-export default connect(mapStateToProps, { updateBlock, fetchPage })(EditPage)
+export default connect(mapStateToProps, {
+  updateBlock,
+  fetchPage,
+  updatePosition,
+})(EditPage)

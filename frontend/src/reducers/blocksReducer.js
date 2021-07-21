@@ -63,8 +63,13 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
       updatedBlocks.splice(index + 1, 0, newBlock)
 
       // Callback alternative for focus() function (should replace with callback)
+      // Use the index to fix
       setTimeout(() => {
-        action.payload.ref.parentElement.parentElement.nextElementSibling.children[0].children[2].focus()
+        const nextField =
+          action.payload.ref.parentElement.parentElement.parentElement.children[
+            index + 1
+          ].children[0].children[2]
+        nextField.focus()
       }, 10)
       return { ...updatedBlocks }
 
