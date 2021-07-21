@@ -48,7 +48,6 @@ router.route('/:id').delete((req, res) => {
 
 // Update the data in a page
 router.route('/update/:id').patch((req, res) => {
-  console.log(req.body)
   const data = {
     id: req.params.id,
     pageData: req.body.pageData,
@@ -59,7 +58,6 @@ router.route('/update/:id').patch((req, res) => {
     if (err) {
       return res.status(400).json(err)
     }
-    console.log(result)
     res.status(200).json(result)
   })
 })
