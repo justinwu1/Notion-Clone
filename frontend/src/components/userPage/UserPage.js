@@ -62,7 +62,7 @@ class UserPage extends Component {
           </div>
 
           <div id='page-content-wrapper'>
-            <EditPage />
+            <EditPage {...this.props} />
           </div>
         </div>
       </>

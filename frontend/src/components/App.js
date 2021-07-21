@@ -26,7 +26,7 @@ class App extends Component {
         <Router history={history}>
           <Header />
           <Route path='/' exact component={this.renderOptions()} />
-          <Route path='/:id' component={this.renderOptions()} />
+          <Route path='/:id' exact component={this.renderOptions()} />
         </Router>
       </>
     )

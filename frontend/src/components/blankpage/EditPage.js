@@ -6,6 +6,12 @@ import { Container } from 'react-bootstrap'
 import { updatePosition, updateBlock, fetchPage } from '../../actions'
 
 class EditPage extends Component {
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      console.log('Fetching...')
+      this.props.fetchPage(this.props.match.params.id)
+    }
+  }
   onDragEnd = (result) => {
     const { destination, source } = result
     // If no destination, exit
@@ -58,10 +64,9 @@ class EditPage extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps)
   return {
     blocks: Object.values(state.blocks),
-    // page: state.streams[ownProps.match.params.id],
+    page: state.pages[ownProps.match.params.id],
   }
 }
 
