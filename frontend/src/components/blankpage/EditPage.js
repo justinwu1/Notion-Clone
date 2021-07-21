@@ -10,7 +10,6 @@ import {
   fetchBlock,
   editPage,
 } from '../../actions'
-let originalData
 let paramsId
 class EditPage extends Component {
   componentDidMount() {
@@ -20,23 +19,23 @@ class EditPage extends Component {
         await this.props.fetchPage(paramsId)
         if (this.props.page) {
           this.props.fetchBlock(this.props.page.pageData)
-          originalData = this.props.blocks
         }
       }
     })
   }
-  componentDidUpdate() {
-    if (originalData) {
-      for (let i = 0; i < this.props.blocks.length; i++) {
-        for (let key in this.props.blocks[i]) {
-          if (originalData[i][key] !== this.props.blocks[i][key]) {
-            // Update the page if there is a difference
-            this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
-          }
+  componentDidUpdate(prevProps) {
+    if (paramsId) {
+      this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
+      for (let i = 0; i < prevProps.blocks.length; i++) {
+        if (prevProps.blocks[i].html !== this.props.blocks[i].html) {
+          console.log('inifite loop')
+          this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
+          return
         }
       }
     }
   }
+
   componentWillUnmount() {
     this.unlisten()
   }
@@ -105,3 +104,9 @@ export default connect(mapStateToProps, {
   fetchBlock,
   editPage,
 })(EditPage)
+
+/*
+Problem: 
+1.originalData is empty intially. So cant loop
+2.
+*/
