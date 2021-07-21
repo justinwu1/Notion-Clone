@@ -79,7 +79,6 @@ const blocksReducers = (blocks = { initialBlock }, action) => {
       index = updatedBlocks.map((block) => block.id).indexOf(action.payload.id)
       updatedBlocks[index] = {
         ...updatedBlocks[index],
-        tag: updatedBlocks.tag,
         html: action.payload.html,
       }
       return { ...updatedBlocks }

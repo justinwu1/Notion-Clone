@@ -24,7 +24,7 @@ class EditBlock extends Component {
       this.props.addBlock({
         id: this.props.id,
         ref: this.contentEditable.current,
-        tag: event.target.outerText,
+        tagName: event.target.outerText,
       })
     }
 

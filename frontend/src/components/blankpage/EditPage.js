@@ -8,19 +8,34 @@ import {
   updateBlock,
   fetchPage,
   fetchBlock,
+  editPage,
 } from '../../actions'
-
+let originalData
+let paramsId
 class EditPage extends Component {
   componentDidMount() {
     this.unlisten = this.props.history.listen(async (location) => {
-      const paramsId = location.pathname.substring(1)
+      paramsId = location.pathname.substring(1)
       if (this.props.match.params.id) {
         await this.props.fetchPage(paramsId)
         if (this.props.page) {
           this.props.fetchBlock(this.props.page.pageData)
+          originalData = this.props.blocks
         }
       }
     })
+  }
+  componentDidUpdate() {
+    if (originalData) {
+      for (let i = 0; i < this.props.blocks.length; i++) {
+        for (let key in this.props.blocks[i]) {
+          if (originalData[i][key] !== this.props.blocks[i][key]) {
+            // Update the page if there is a difference
+            this.props.editPage({ _id: paramsId, pageData: this.props.blocks })
+          }
+        }
+      }
+    }
   }
   componentWillUnmount() {
     this.unlisten()
@@ -44,8 +59,7 @@ class EditPage extends Component {
     this.props.updatePosition(result)
   }
   renderBlocks() {
-    const newBlocks = [...this.props.blocks]
-    return newBlocks.map((block, index) => {
+    return this.props.blocks.map((block, index) => {
       return (
         <Droppable key={block.id} droppableId={block.id}>
           {(provided) => (
@@ -89,4 +103,5 @@ export default connect(mapStateToProps, {
   fetchPage,
   updatePosition,
   fetchBlock,
+  editPage,
 })(EditPage)

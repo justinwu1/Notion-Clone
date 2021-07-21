@@ -33,9 +33,10 @@ export const fetchPage = (id) => {
   }
 }
 
-export const editPage = (id, pageData) => {
+export const editPage = (pagesData) => {
   return async (dispatch) => {
-    const response = await pages.put(`/${id}`, pageData)
+    const id = pagesData._id
+    const response = await pages.patch(`/update/${id}`, pagesData)
     dispatch({ type: EDIT_PAGE, payload: response.data })
   }
 }
