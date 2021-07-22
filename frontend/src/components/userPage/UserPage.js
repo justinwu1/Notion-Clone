@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 
-// TODO: Navigate to every page, when edit, upload that data.
 class UserPage extends Component {
   async componentDidMount() {
     await this.props.fetchPages()
@@ -42,7 +41,7 @@ class UserPage extends Component {
         >
           {page.pageData['0'].html}
           <FontAwesomeIcon
-            style={{ marginLeft: '15px' }}
+            style={{ marginLeft: '15px', width: '30px' }}
             icon={faTrash}
             onClick={() => {
               this.props.deletePage(page._id)

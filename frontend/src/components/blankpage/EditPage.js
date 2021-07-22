@@ -10,6 +10,7 @@ import {
   fetchBlock,
   editPage,
 } from '../../actions'
+
 let paramsId
 class EditPage extends Component {
   componentDidMount() {
@@ -110,9 +111,3 @@ export default connect(mapStateToProps, {
   fetchBlock,
   editPage,
 })(EditPage)
-
-/*
-Problem: 
-1.originalData is empty intially. So cant loop
-2.
-*/
