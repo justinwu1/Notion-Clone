@@ -25,6 +25,7 @@ class UserPage extends Component {
     }
     this.props.createPages(data)
   }
+
   onDelete = (id) => {
     this.props.deletePage(id)
   }
@@ -40,14 +41,18 @@ class UserPage extends Component {
           className='list-group-item list-group-item-action list-group-item-light p-3'
         >
           {page.pageData['0'].html}
-          <FontAwesomeIcon
-            style={{ marginLeft: '15px', width: '30px' }}
-            icon={faTrash}
+          <span
             onClick={() => {
               this.props.deletePage(page._id)
               this.props.clearBlock()
+              window.location.reload()
             }}
-          />
+          >
+            <FontAwesomeIcon
+              style={{ marginLeft: '15px', fontSize: '1rem' }}
+              icon={faTrash}
+            />
+          </span>
         </Link>
       )
     })

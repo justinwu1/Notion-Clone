@@ -30,6 +30,10 @@ class EditPage extends Component {
     paramsId = this.props.match.params.id
     if (paramsId) {
       for (let i = 0; i < prevProps.blocks.length; i++) {
+        // If deleted blocks, dont update
+        if (this.props.blocks[i] === undefined) {
+          break
+        }
         if (prevProps.blocks[i].html !== this.props.blocks[i].html) {
           // Refetch immediately to show up changes, edit & refetch.
           await this.props.editPage({
