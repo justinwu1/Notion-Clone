@@ -12,7 +12,7 @@ This is a Notion-Clone that's built on top of MERN stack. I built it only becaus
 Features: 
 -   A Notion Editor that allows users to type, delete, insert a new block
 -   Authentication via Oauth2
--   Drag and Drop blocks
+-   Drag and Drop blocks with react-beautiful-dnd
 -  Select menu and Change Blocks
 
 
